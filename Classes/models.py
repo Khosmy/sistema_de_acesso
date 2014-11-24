@@ -17,8 +17,8 @@ SEXO = [
 
 ACAO = [
 
-	('Ent','Entrada'),
-	('Sai','Saida')
+	('Entra','Entrada'),
+	('Saida','Saida')
 
 ]
 
@@ -116,8 +116,8 @@ class Local(models.Model):
 class Acesso(models.Model):
 	Pessoa = models.ForeignKey(Pessoa,verbose_name="Pessoa",null=True)
 	Nivel = models.DateField('Escolha o Nivel de Acesso',max_length=1,choices=TIPO_ACESSO,null=True)
-	Entrada = models.DateField('Escolha o turno de Entrada',max_length=3,choices=ACAO,null=True)
-	Saida = models.DateField('Escolha o Turno de Saida',max_length=3,choices=ACAO,null=True)
+	Entrada = models.DateField('Escolha o turno de Entrada',max_length=5,choices=ACAO,null=True)
+	Saida = models.DateField('Escolha o Turno de Saida',max_length=5,choices=ACAO,null=True)
 	def __unicode__(self):
 		return "%s" % (self.Nivel)
 
