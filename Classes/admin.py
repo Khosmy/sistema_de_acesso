@@ -2,33 +2,37 @@
 
 from django.contrib import admin
 
+from models import Nivel_Acesso
 from models import Pessoa
 from models import Local
-from models import Acesso
 from models import Permissao
 
-class AdminPessoa(admin.ModelAdmin):
-	 list_display = ['Nome','Tipo_Acesso']
-	 list_filter = []
-	 search_fields = ['Nome']
+class Nivel_AcessoAdmin(admin.ModelAdmin):
 
-class AdminLocal(admin.ModelAdmin):
-	 list_display = ['pessoa','setor','area']
-	 list_filter = []
-	 search_fields = ['setor','area']
+	list_display = ['NiveS']
+	list_filter = ['NiveS']
+	search_fields = ['NiveS']
+	save_as = True
 
-class AdminAcesso(admin.ModelAdmin):
-	 list_display = ['pessoa','nivel','Entrada','Saida']
-	 list_filter = []
-	 search_fields = ['pessoa','nivel']
+class PessoaAdmin(admin.ModelAdmin):
 
-class AdminPermissao(admin.ModelAdmin):
-	 list_display = ['alerta','horario','data']
-	 list_filter = []
-	 search_fields = ['alerta']
+	 list_display = ['Pessoa','Nivel_Acesso','Sexo','CPF','Email']
+	 list_filter = ['Pessoa','Nivel_Acesso']
+	 search_fields = ['Pessoa','Nivel_Acesso','CPF','Email']
 
-admin.site.register(Pessoa,AdminPessoa)
-admin.site.register(Local, AdminLocal)
-admin.site.register(Acesso,AdminAcesso)
-admin.site.register(Permissao,AdminPermissao)
+class LocalAdmin(admin.ModelAdmin):
+	 list_display = ['Pessoa','Nivel_Acesso']
+	 list_filter = ['Pessoa','Nivel_Acesso']
+	 search_fields = ['Pessoa','Nivel_Acesso']
+
+class PermissaoAdmin(admin.ModelAdmin):
+	 list_display = ['Local','Pessoa','Data','HoraChegada','HoraSaida','status']
+	 list_filter = ['Local','Pessoa','Data','HoraChegada','HoraSaida','status']
+	 search_fields = ['Local','Pessoa']
+
+
+admin.site.register(Nivel_Acesso,Nivel_AcessoAdmin)
+admin.site.register(Pessoa,PessoaAdmin)
+admin.site.register(Local, LocalAdmin)
+admin.site.register(Permissao,PermissaoAdmin)
 
